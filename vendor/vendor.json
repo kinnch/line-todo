@@ -33,6 +33,30 @@
 			"revisionTime": "2017-10-04T17:02:40Z"
 		},
 		{
+			"checksumSHA1": "MW86fcHphx/bic6ykjtV0IMaGM4=",
+			"path": "github.com/labstack/echo",
+			"revision": "e6ac0023d2f9581409747aaf34e5f620f14325bc",
+			"revisionTime": "2019-01-09T23:19:48Z"
+		},
+		{
+			"checksumSHA1": "Yz8nRvgJR9qN9OORCUQKc4eHC7Q=",
+			"path": "github.com/labstack/gommon/color",
+			"revision": "34167a09256a4fcb5d26dd88d02b7b353d86838a",
+			"revisionTime": "2018-12-19T17:59:04Z"
+		},
+		{
+			"checksumSHA1": "aPI7uE0fQNHFKVLP1pIY1fktoec=",
+			"path": "github.com/labstack/gommon/log",
+			"revision": "34167a09256a4fcb5d26dd88d02b7b353d86838a",
+			"revisionTime": "2018-12-19T17:59:04Z"
+		},
+		{
+			"checksumSHA1": "OFNLfmwuQlgkJIGZcVRwKDBGnrw=",
+			"path": "github.com/line/line-bot-sdk-go/linebot",
+			"revision": "0d6ae9992e4f326dbfd58a3223c0edbeac4fb142",
+			"revisionTime": "2019-01-11T05:44:38Z"
+		},
+		{
 			"checksumSHA1": "ZUOd8OUOp+xdpB7p4w/O86Y8wyc=",
 			"path": "github.com/manucorporat/sse",
 			"revision": "c142f0f1baea5cef7f98a8a6c222f6134368c1f5"
@@ -52,6 +76,30 @@
 			"path": "github.com/russross/blackfriday",
 			"revision": "abafa45cd843f4f4935c29a2e8f3d73a01820fc3",
 			"revisionTime": "2018-11-15T20:38:43Z"
+		},
+		{
+			"checksumSHA1": "Y9MRcpDNz4epw59SqGPmnW+ADKk=",
+			"path": "github.com/valyala/bytebufferpool",
+			"revision": "cdfbe9377474227bb42120c1e22fd4433e7f69bf",
+			"revisionTime": "2018-09-05T18:22:47Z"
+		},
+		{
+			"checksumSHA1": "UHztphFBVZKyLNbrMDVPM0VdJ60=",
+			"path": "github.com/valyala/fasttemplate",
+			"revision": "dcecefd839c4193db0d35b88ec65b4c12d360ab0",
+			"revisionTime": "2017-02-24T21:24:29Z"
+		},
+		{
+			"checksumSHA1": "ETfjuu5F8ejF27iatik4uPga2VQ=",
+			"path": "golang.org/x/crypto/acme",
+			"revision": "ff983b9c42bc9fbf91556e191cc8efb585c16908",
+			"revisionTime": "2018-07-25T11:53:45Z"
+		},
+		{
+			"checksumSHA1": "Yjacru/DE9yXphaefh67NrjNgAk=",
+			"path": "golang.org/x/crypto/acme/autocert",
+			"revision": "ff983b9c42bc9fbf91556e191cc8efb585c16908",
+			"revisionTime": "2018-07-25T11:53:45Z"
 		},
 		{
 			"checksumSHA1": "hKZGpbFuCrkE4s1vxubKK1aFlfI=",
