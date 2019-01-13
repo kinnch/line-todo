@@ -1,2 +1,2 @@
-initenv.sh
 .env
+.docker_build/

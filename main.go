@@ -1,34 +1,34 @@
 package main
 
 import (
-	"github.com/kinnch/line-todo/servicemanagement/delivery/http"
 	"log"
+	"net/http"
 	"os"
 
-	"github.com/kinnch/line-todo/servicemanagement"
-
-	"github.com/labstack/echo"
-	"github.com/line/line-bot-sdk-go/linebot"
+	"github.com/gin-gonic/gin"
+	_ "github.com/heroku/x/hmetrics/onload"
+	"github.com/russross/blackfriday"
 )
 
 func main() {
-	startService()
-}
+	port := os.Getenv("PORT")
 
-func connectLineBot() *linebot.Client {
-	bot, err := linebot.New(
-		os.Getenv("CHANNEL_SECRET"),
-		os.Getenv("CHANNEL_TOKEN"),
-	)
-	if err != nil {
-		log.Fatal(err)
+	if port == "" {
+		log.Fatal("$PORT must be set")
 	}
-	return bot
-}
 
-func startService() {
-	e := echo.New()
-	bankCoreInfo := servicemanagement.NewBankCoreServiceInfo()
-	http.NewServiceHTTPHandler(e, connectLineBot(), bankCoreInfo)
-	e.Logger.Fatal(e.Start(":6000"))
+	router := gin.New()
+	router.Use(gin.Logger())
+	router.LoadHTMLGlob("templates/*.tmpl.html")
+	router.Static("/static", "static")
+
+	router.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.tmpl.html", nil)
+	})
+
+	router.GET("/mark", func(c *gin.Context) {
+		c.String(http.StatusOK, string(blackfriday.MarkdownBasic([]byte("**hi!**"))))
+	})
+
+	router.Run(":" + port)
 }
