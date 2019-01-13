@@ -26,8 +26,8 @@ func main() {
 		c.HTML(http.StatusOK, "index.tmpl.html", nil)
 	})
 
-	router.GET("/mark", func(c *gin.Context) {
-		c.String(http.StatusOK, string(blackfriday.MarkdownBasic([]byte("**hi!**"))))
+	router.GET("/mark2", func(c *gin.Context) {
+		c.String(http.StatusOK, string(blackfriday.MarkdownBasic([]byte("**hi!5555**"))))
 	})
 
 	router.Run(":" + port)
