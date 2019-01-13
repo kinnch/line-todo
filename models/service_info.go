@@ -11,6 +11,7 @@ type ServiceInfo struct {
 type ServicesInfo []ServiceInfo
 
 type Todo struct {
-	Task string
-	Time time.Time
+	UserID string
+	Task   string
+	Time   time.Time
 }
