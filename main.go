@@ -1,0 +1,34 @@
+package main
+
+import (
+	"github.com/kinnch/line-todo/servicemanagement/delivery/http"
+	"log"
+	"os"
+
+	"github.com/kinnch/line-todo/servicemanagement"
+
+	"github.com/labstack/echo"
+	"github.com/line/line-bot-sdk-go/linebot"
+)
+
+func main() {
+	startService()
+}
+
+func connectLineBot() *linebot.Client {
+	bot, err := linebot.New(
+		os.Getenv("CHANNEL_SECRET"),
+		os.Getenv("CHANNEL_TOKEN"),
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return bot
+}
+
+func startService() {
+	e := echo.New()
+	bankCoreInfo := servicemanagement.NewBankCoreServiceInfo()
+	http.NewServiceHTTPHandler(e, connectLineBot(), bankCoreInfo)
+	e.Logger.Fatal(e.Start(":6000"))
+}
