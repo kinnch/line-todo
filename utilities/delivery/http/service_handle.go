@@ -2,15 +2,12 @@ package http
 
 import (
 	"context"
+	"github.com/kinnch/line-todo/core/todo"
 
 	"github.com/kinnch/line-todo/models"
-	"github.com/kinnch/line-todo/servicemanagement"
-
-	"log"
-	"time"
-
 	"github.com/labstack/echo"
 	"github.com/line/line-bot-sdk-go/linebot"
+	"log"
 )
 
 type HTTPCallBackHanlder struct {
@@ -36,6 +33,7 @@ func (handler *HTTPCallBackHanlder) Callback(c echo.Context) error {
 	if ctx == nil {
 		ctx = context.Background()
 	}
+
 	events, err := handler.Bot.ParseRequest(c.Request())
 	if err != nil {
 		if err == linebot.ErrInvalidSignature {
@@ -49,7 +47,7 @@ func (handler *HTTPCallBackHanlder) Callback(c echo.Context) error {
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				messageFromPing := servicemanagement.PingService(message.Text, handler.ServicesInfo, time.Second*5)
+				messageFromPing := todo.TodoController(event.Source.UserID ,message.Text)
 				if _, err = handler.Bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(messageFromPing)).Do(); err != nil {
 					log.Print(err)
 				}
