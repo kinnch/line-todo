@@ -32,7 +32,11 @@ func decodeMessage(user_id string, message string) (models.Todo, error) {
 	if splted[0] == "" {
 		return todo, errors.New("task provided is invalid")
 	}
-	dtm, err := getDateTimeFromString(splted[1], splted[2])
+	var timeStr string
+	if len(splted) >2 {
+		timeStr = splted[2]
+	}
+	dtm, err := getDateTimeFromString(strings.Trim(splted[1]," "),timeStr )
 	if err != nil {
 		return todo, err
 	}

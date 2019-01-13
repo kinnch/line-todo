@@ -14,7 +14,7 @@ RUN STACK=heroku-16 /tmp/buildpack/heroku/go/bin/compile /app /tmp/build_cache /
 FROM heroku/heroku:16
 
 COPY --from=build /app /app
-ENV HOME /app
+ENV HOME /app 192.168.43.131
 WORKDIR /app
 RUN useradd -m heroku
 USER heroku
