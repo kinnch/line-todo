@@ -1,0 +1,6 @@
+FROM ubuntu:latest
+MAINTAINER Comsan Chanma-TNFIS SE <comsan.ch@tnis.com>
+COPY ./cicd/zoneinfo.zip /GO/lib/time/
+COPY ../../../bin/line-todo /tmp/
+ENTRYPOINT ["/tmp/servapi",""]
+EXPOSE 6000
