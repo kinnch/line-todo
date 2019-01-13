@@ -4,13 +4,23 @@ import (
 	"errors"
 	"fmt"
 	"github.com/kinnch/line-todo/models"
+	"github.com/kinnch/line-todo/provider/firebase"
 	"github.com/kinnch/line-todo/utilities/sysVar"
 	"strings"
 	"time"
 )
 
 func TodoController(user_id string, message string) string {
-	return fmt.Sprintf("we recieve your message: \"%s\" from user: %s \n", message, user_id)
+	//return fmt.Sprintf("we recieve your message: \"%s\" from user: %s \n", message, user_id)
+	t,err := decodeMessage(user_id,message)
+	if err != nil {
+		return fmt.Sprintf("failed to decode message! error %v",err.Error())
+	}
+	err = firebase.NewTodoRepository().Add(t)
+	if err != nil {
+		return fmt.Sprintf("failed to add todo! error %v",err.Error())
+	}
+	return fmt.Sprintf("Todo : \n  task : %s \n  due : %s \n  ADDED",t.Task, t.Time.In(sysVar.Location()).Format(time.RFC822))
 }
 func decodeMessage(user_id string, message string) (models.Todo, error) {
 	var todo models.Todo
