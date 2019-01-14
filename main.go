@@ -4,7 +4,6 @@ import (
 	"log"
 	"os"
 
-	"github.com/kinnch/line-todo/servicemanagement"
 	"github.com/kinnch/line-todo/utilities/delivery/http"
 
 	_ "github.com/heroku/x/hmetrics/onload"
@@ -46,7 +45,6 @@ func main() {
 	// router.Run(":" + port)
 	log.Println("starting line bot server now")
 	e := echo.New()
-	bankCoreInfo := servicemanagement.NewBankCoreServiceInfo()
-	http.NewServiceHTTPHandler(e, connectLineBot(), bankCoreInfo)
+	http.NewServiceHTTPHandler(e, connectLineBot(), nil)
 	e.Logger.Fatal(e.Start(":" + port))
 }
