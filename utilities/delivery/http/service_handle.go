@@ -24,6 +24,8 @@ func NewServiceHTTPHandler(e *echo.Echo, linebot *linebot.Client, servicesInfo *
 		return c.String(200, "Line boi Service : We are good thank you for asking us.")
 	})
 	e.POST("/callback", hanlders.Callback)
+
+	e.POST("/login", loginHandler)
 }
 
 // Callback provides the function to handle request from line
@@ -47,7 +49,7 @@ func (handler *HTTPCallBackHanlder) Callback(c echo.Context) error {
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				messageFromPing := todo.TodoController(event.Source.UserID ,message.Text)
+				messageFromPing := todo.TodoController(event.Source.UserID, message.Text)
 				if _, err = handler.Bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(messageFromPing)).Do(); err != nil {
 					log.Print(err)
 				}
@@ -55,4 +57,8 @@ func (handler *HTTPCallBackHanlder) Callback(c echo.Context) error {
 		}
 	}
 	return c.JSON(200, "")
+}
+
+func loginHandler(c echo.Context) error {
+
 }

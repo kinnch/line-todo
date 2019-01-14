@@ -12,15 +12,18 @@ import (
 
 func TodoController(user_id string, message string) string {
 	//return fmt.Sprintf("we recieve your message: \"%s\" from user: %s \n", message, user_id)
-	t,err := decodeMessage(user_id,message)
+	if strings.ToLower(message) == "edit" {
+		return "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1638368945&redirect_uri=https%3A%2F%2Fpeaceful-fjord-91875.herokuapp.com%2Flogin&state=12345abcde&scope=openid"
+	}
+	t, err := decodeMessage(user_id, message)
 	if err != nil {
-		return fmt.Sprintf("failed to decode message! error %v",err.Error())
+		return fmt.Sprintf("failed to decode message! error %v", err.Error())
 	}
 	err = firebase.NewTodoRepository().Add(t)
 	if err != nil {
-		return fmt.Sprintf("failed to add todo! error %v",err.Error())
+		return fmt.Sprintf("failed to add todo! error %v", err.Error())
 	}
-	return fmt.Sprintf("Todo : \n  task : %s \n  due : %s \n  ADDED",t.Task, t.Time.In(sysVar.Location()).Format(time.RFC822))
+	return fmt.Sprintf("Todo : \n  task : %s \n  due : %s \n  ADDED", t.Task, t.Time.In(sysVar.Location()).Format(time.RFC822))
 }
 func decodeMessage(user_id string, message string) (models.Todo, error) {
 	var todo models.Todo
@@ -33,10 +36,10 @@ func decodeMessage(user_id string, message string) (models.Todo, error) {
 		return todo, errors.New("task provided is invalid")
 	}
 	var timeStr string
-	if len(splted) >2 {
+	if len(splted) > 2 {
 		timeStr = splted[2]
 	}
-	dtm, err := getDateTimeFromString(strings.Trim(splted[1]," "),timeStr )
+	dtm, err := getDateTimeFromString(strings.Trim(splted[1], " "), timeStr)
 	if err != nil {
 		return todo, err
 	}
