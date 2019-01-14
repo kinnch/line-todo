@@ -25,7 +25,7 @@ func NewServiceHTTPHandler(e *echo.Echo, linebot *linebot.Client, servicesInfo *
 	})
 	e.POST("/callback", hanlders.Callback)
 
-	e.POST("/login", loginHandler)
+	e.GET("/login", loginHandler)
 }
 
 // Callback provides the function to handle request from line
@@ -60,5 +60,5 @@ func (handler *HTTPCallBackHanlder) Callback(c echo.Context) error {
 }
 
 func loginHandler(c echo.Context) error {
-
+	return c.JSON(200, "TODO : get todos from firebase")
 }
